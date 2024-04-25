@@ -23,6 +23,7 @@
                                 <style>
                                     <class name="big"/>
                                 </style>
+                                <signal name="button-clicked" handler="onWelcomeButtonClicked"/>
                             </object>
                         </property>
                     </object>
