@@ -22,12 +22,13 @@
         </child>
         <child>
             <object class="GtkButton">
+                <property name="action-name">win.change-view</property>
+                <property name="action-target">'files'</property>
                 <property name="label">Let's go!</property>
                 <property name="halign">center</property>
                 <style>
                     <class name="suggested-action"/>
                 </style>
-                <signal name="clicked" handler="onButtonClicked"/>
             </object>
         </child>
     </template>
