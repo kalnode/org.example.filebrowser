@@ -2,8 +2,11 @@
 <gresources>
     <gresource prefix="/org/example/filebrowser">
         <file>css/style.css</file>
+        <!-- <file>ui/Video.ui</file> -->
+        <file>ui/VideoWidget.ui</file>
         <file>ui/WelcomeWidget.ui</file>
         <file>ui/Window.ui</file>
+        <file>ui/file_example_MP4_640_3MG.mp4</file>
     </gresource>
     <gresource prefix="/org/example/filebrowser/icons/scalable/actions">
         <file alias="filebrowser-welcome-symbolic.svg">icons/welcome-symbolic.svg</file>

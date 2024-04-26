@@ -3,6 +3,7 @@
     <gresource prefix="/org/example/filebrowser/js">
 		<file>main.js</file>
 		<file>Application.js</file>
+        <file>VideoWidget.js</file>
 		<file>WelcomeWidget.js</file>
 		<file>Window.js</file>
     </gresource>
