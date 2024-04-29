@@ -1,24 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <interface>
     <requires lib="gtk" version="4.0"/>
-    <template class="FbrVideoWidget">
-        <property name="layout-manager">
-            <object class="GtkBoxLayout">
-                <property name="orientation">vertical</property>
+    <template class="FbrVideoWidget" parent="GtkBox">
+        <property name="orientation">1</property>
+        <property name="halign">3</property>
+        <child>
+            <object class="GtkVideo" id="videoActual">
+                <property name="autoplay">true</property>
+                <property name="loop">true</property>
+                <property name="width-request">540</property>
+                <property name="height-request">540</property>
             </object>
-        </property>
-        <object class="GtkBox">
-            <property name="orientation">1</property>
-            <property name="halign">3</property>
-            <child>
-                <object class="GtkVideo" id="videoActual">
-                    <!-- <property name="file" /> -->
-                    <property name="autoplay">true</property>
-                    <property name="loop">true</property>
-                    <property name="width-request">540</property>
-                    <property name="height-request">540</property>
-                </object>
-            </child>
-        </object>
+        </child>
     </template>
 </interface>

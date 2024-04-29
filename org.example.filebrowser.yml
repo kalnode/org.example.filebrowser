@@ -10,6 +10,10 @@ finish-args:
   - --socket=pulseaudio
   - --share=ipc
   - --device=dri
+  - --device=all
+  - --filesystem=xdg-run/pipewire-0:ro
+  - --filesystem=xdg-videos
+  - --filesystem=xdg-run/gvfsd
 
 cleanup:
   - /include

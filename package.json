@@ -4,8 +4,8 @@
   "description": "flatpak run org.flatpak.Builder --force-clean --user --install build-dir org.example.filebrowser.yml",
   "main": "src/main.js",
   "scripts": {
-    "build": "flatpak run org.flatpak.Builder --force-clean --user --install build-dir org.example.filebrowser.yml",
-    "run": "flatpak run org.example.filebrowser",
+    "build": "GTK_MEDIA=gstreamer flatpak run org.flatpak.Builder --force-clean --user --install build-dir org.example.filebrowser.yml",
+    "run": "GTK_MEDIA=help flatpak run org.example.filebrowser",
     "runDebug": "flatpak run --command=sh --devel org.example.filebrowser"
   },
   "author": "",

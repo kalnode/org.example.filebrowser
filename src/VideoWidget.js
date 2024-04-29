@@ -9,9 +9,6 @@ export const VideoWidget = GObject.registerClass({
     Template: 'resource:///org/example/filebrowser/ui/VideoWidget.ui',
     InternalChildren: ['videoActual'],
     Properties: {
-        // VideoFile: GObject.ParamSpec.string(
-        //     'videoFile'
-        // ),
         VideoFile: GObject.ParamSpec.string(
             'video-file', // name
             'Video File', // nick
@@ -27,33 +24,14 @@ export const VideoWidget = GObject.registerClass({
             '' // default value
         ),
     }
-    // Signals: {
-    //     'button-clicked': {},
-    // },
-}, class extends Gtk.Widget {
+}, class FbrVideoWidget extends Gtk.Box {
 
     constructor(params={}) {
         super(params);
 
-        //log('Video mounted 111');
 
-      //  var video = this;
-       // video.file = Gio.File.new_for_path("./assets/video/file_example_MP4_640_3MG.mp4");
-
-        //log('Video mounted 222', video);
-
-        //console.log("Video file 111 is", video.file)
-
-        //console.log("Video file 222 is", video._videoFile)
-
-
-        //let builder = Gtk.Builder.new();
-       // let videoPlayerInstance = builder.get_object('videoActual');
-        //console.log("videoPlayerInstance is", videoPlayerInstance)
-
-        //log('videoFile is:', videoFile);
+        // Adding click gesture; see Workbench example
         // const click_gesture = new Gtk.GestureClick();
-
         // click_gesture.connect("pressed", () => {
         //     const media_stream = video.media_stream;
         //     if (media_stream.playing) {
@@ -72,45 +50,104 @@ export const VideoWidget = GObject.registerClass({
     }
 
     set videoFile(value) {
-        log('set videoFile() value: ', value);
+
+        // Triggered by instance of video widget; property passed is "value".
+        // Example:
+        // <property name="child">
+        //     <object class="FbrVideoWidget" id="videoTest">
+        //         <property name="video-file">file_example_MP4_640_3MG.mp4</property>
+        //     </object>
+        // </property>
+
+        log('set videoFile(): ', value);
+
+        // -----------------------------------
+        // SET LOCAL REFERENCE
+        // -----------------------------------
         // Do nothing if the new value is the same as the old one
-        if (this._videoFile === value)
-            return;
+            //if (this._video === value)
+            //    return;
         // Store the value in an internal property
-        this._videoFile = value;
-        // Notify that the value has changed
+            //this._video = value;
 
 
+        // -----------------------------------
+        // DIRECTLY GET VIDEO ELEMENT (in template)
+        // -----------------------------------
+        // Attempt to get video element in template, based on id="videoActual".
+        // Keeping code for now. We may not need it since we have a reference to the video element via: InternalChildren: ['videoActual']
+        // let builder = Gtk.Builder.new();
+        // const videoPlayerInstance = builder.get_object('videoActual');
+        // console.log("videoPlayerInstance is", videoPlayerInstance)
+
+
+        // -----------------------------------
+        // LOAD VIDEO FILE
+        // -----------------------------------
+
+        // ASSEMBLE FILEPATH
         const filepath = GLib.build_filenamev([GLib.get_home_dir(), value]);
+        // ... or ...
+        // For testing, get fixed file:
+        //const filepath = "./assets/video/file_example_MP4_640_3MG.mp4"
         log('filepath is: ', filepath);
+
+        // CREATE FILE OBJECT
+        const file = Gio.File.new_for_path(filepath);
+        // const file = Gio.File.new_for_uri(filepath);
+
+        // CHECK FILE EXISTS
+        // TODO: Does this work?
+        // if (file.query_exists(filepath)) {
+            // log("file exists!")
+        // }
+
+        // ... or ...
+
+        // MAKE MEDIA OBJECT
+        // const media_stream = gtk_video_new_for_media_stream(GTK_MEDIA_STREAM(media_stream));
+        const media_stream =  Gtk.MediaFile.new_for_filename(filepath);
+        // const media_stream =  Gtk.MediaFile.new_for_file(filepath);
+        // const media_stream = Gtk.Video.new_for_media_stream(media_stream);
+
+        // -----------------------------------
+        // APPLY VIDEO FILE
+        // -----------------------------------
+        // Apply video object to video instance
+
+        // Directly pointing to an app resource
+        //this._videoActual.set_resource('/org/example/filebrowser/ui/file_example_MP4_640_3MG.mp4');
+
+        // Setting the video file
+        //this._videoActual.set_file(file);
+
+        // Setting via media stream
+        this._videoActual.set_media_stream(media_stream);
+
+
+        // -----------------------------------
+        // CONFIGURE VIDEO PLAYER
+        // -----------------------------------
+
+        log(this._videoActual);
+
+        // SET AUTO PLAY
+        // gtk_video_set_autoplay(GTK_VIDEO(video), true);
+        this._videoActual.set_autoplay(true);
+
+        // PLAY
+        // Play regular
+        //this._videoActual.play();
+        // Play media stream
+        //this._videoActual.media_stream.play();
         
-        //const file = Gio.File.new_for_path(filepath);
-        //log('file is: ', file);
 
-       // const file2 = Gio.File.new_for_uri(filepath);
-       // log('file2 is: ', file2);
-                //videoPlayerInstance.file = file2;
-
-       // let builder = Gtk.Builder.new();
-       // const videoPlayerInstance = builder.get_object('videoActual');
-       // console.log("videoPlayerInstance is", videoPlayerInstance)
+        // MISC LAYOUT STUFF
+        this._videoActual.set_hexpand(true);
+        this._videoActual.set_vexpand(true);
 
 
-        console.log("this._videoActual is", this._videoActual)
-        //this._videoActual.file = Gio.File.new_for_uri(filepath);
-
-        this._videoActual.set_resource('/org/example/filebrowser/ui/file_example_MP4_640_3MG.mp4')
-        
-        
-        //this.videoFileActual(file); //Gio.File.new_for_path(file);
-        console.log("this._videoActual Video file 111 is", this._videoActual.file)
-
-
-        //this._videoActual.set_autoplay(true);
-        console.log("this._videoActual Video file 111 is", this._videoActual)
-
-        this._videoActual.media_stream.play();
-
+        // NOTIFY (what? who?) THAT VIDEO UPDATED
         this.notify('video-file');
     }
 

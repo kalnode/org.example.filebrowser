@@ -11,6 +11,23 @@ APP_ID = 'org.example.filebrowser'
 # Import the modules
 gnome = import('gnome')
 
+# gst_ver = '>= 1.20.0'
+# gst_ver = '>= 1.22'
+gst_ver = '>= 1.20.1'
+
+# gst_dep = dependency('gstreamer-1.0',
+#   version: gst_ver,
+#   required: false,
+# )
+
+filebrowser_deps = [
+  dependency('gstreamer-1.0', version: gst_ver),
+  dependency('gstreamer-gl-1.0', version: gst_ver),
+  dependency('gstreamer-play-1.0', version: gst_ver)
+]
+
 # Load instructions from subdirectories
 subdir('data')
 subdir('src')
+
+#executable('main', 'src/main.js', dependencies: filebrowser_deps)
