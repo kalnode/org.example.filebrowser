@@ -15,16 +15,17 @@ gnome = import('gnome')
 # gst_ver = '>= 1.22'
 gst_ver = '>= 1.20.1'
 
-# gst_dep = dependency('gstreamer-1.0',
-#   version: gst_ver,
-#   required: false,
-# )
 
 filebrowser_deps = [
   dependency('gstreamer-1.0', version: gst_ver),
   dependency('gstreamer-gl-1.0', version: gst_ver),
   dependency('gstreamer-play-1.0', version: gst_ver)
 ]
+
+# gst_dep = dependency('gstreamer-1.0',
+#   version: gst_ver,
+#   required: false,
+# )
 
 # Load instructions from subdirectories
 subdir('data')
