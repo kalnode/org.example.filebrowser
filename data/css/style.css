@@ -1,9 +1,14 @@
-welcome {
-    border-spacing: 18px;
-    margin: 36px;
+window {
+    background-color: orchid;
 }
 
-welcome.big > label {
+widgetWelcome {
+    border-spacing: 18px;
+    margin: 36px;
+    background-color: lime;
+}
+
+widgetWelcome.big > label {
     font-size: 1.4em;
     font-weight: bold;
 }

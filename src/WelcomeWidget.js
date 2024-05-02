@@ -3,7 +3,7 @@ import Gtk from 'gi://Gtk';
 
 export const WelcomeWidget = GObject.registerClass({
     GTypeName: 'FbrWelcomeWidget',
-    CssName: 'welcome',
+    CssName: 'widgetWelcome',
     Template: 'resource:///org/example/filebrowser/ui/WelcomeWidget.ui',
     InternalChildren: ['welcomeLabel'],
     Properties: {
